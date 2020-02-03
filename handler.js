@@ -5,7 +5,9 @@ const express = require('express');
 const app = express();
 
 app.get('/tasks', function (req, res) {
-  res.send('Hello World!');
+  res.json({
+    message: 'Your API works',
+  });
 });
 
 module.exports.tasks = serverless(app);
