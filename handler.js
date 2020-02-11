@@ -4,39 +4,47 @@ const serverless = require('serverless-http');
 const express = require('express');
 const app = express();
 const uuidv4 = require('uuid/v4');
+const mysql = require('mysql');
 
+const connection = mysql.createConnection({
+  host     : 'techreturners.cfvasm2jpq9v.eu-west-2.rds.amazonaws.com',
+  user     : 'admin',
+  password : '5u5anc0de5',
+  database : 'tasks'
+});
+
+
+// Retrieving tasks
 app.get('/tasks', function (req, res) {
 
-  const someTasks = [
-    {
-      taskId: uuidv4(),
-      description: "Buy some milk",
-      completed: false
-    },
-    {
-      taskId: uuidv4(),
-      description: "Test API in postman",
-      completed: false
+  connection.query('SELECT * FROM `task` WHERE `userId` = "geoff"', function (error, results, fields) {
+    // error will be an Error if one occurred during the query
+    if(error) {
+      console.error("Your query had a problem with fetching tasks", error);
+      res.status(500).json({errorMessage: error});
     }
-  ]
-  
-  res.json({
-    tasks: someTasks
+    else {
+      // Query was successful
+      res.json({tasks: results});
+    }
   });
 });
 
+// Creating tasks
 app.post('/tasks', function (req, res) {
   res.json({
     message: 'Your POST works',
   });
 });
 
+// Updating tasks
 app.put('/tasks/:taskId', function (req, res) {
   res.json({
     message: 'Your PUT works',
   });
 });
 
+// Deleting tasks
 app.delete('/tasks/:taskId', function (req, res) {
   res.json({
     message: 'Your DELETE works',
