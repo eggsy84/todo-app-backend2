@@ -7,10 +7,10 @@ const uuidv4 = require('uuid/v4');
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  host     : 'techreturners.cfvasm2jpq9v.eu-west-2.rds.amazonaws.com',
-  user     : 'admin',
-  password : '5u5anc0de5',
-  database : 'tasks'
+  host     : 'XXXXXXXXXX',
+  user     : 'XXXXXXXXXXX',
+  password : 'XXXXXXXXXXX',
+  database : 'XXXXXXXXXXX'
 });
 
 
