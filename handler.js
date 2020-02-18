@@ -7,10 +7,10 @@ const uuidv4 = require('uuid/v4');
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  host     : 'XXXXXXXXXX',
-  user     : 'XXXXXXXXXXX',
-  password : 'XXXXXXXXXXX',
-  database : 'XXXXXXXXXXX'
+  host     : process.env.DB_HOST,
+  user     : process.env.DB_USER,
+  password : process.env.DB_PASSWORD,
+  database : process.env.DB_SCHEMA
 });
 
 
@@ -25,7 +25,10 @@ app.get('/tasks', function (req, res) {
     }
     else {
       // Query was successful
-      res.json({tasks: results});
+      res.json({
+        tasks: results,
+        envThing: process.env.ENV_THING
+      });
     }
   });
 });
