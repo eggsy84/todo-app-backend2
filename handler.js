@@ -26,8 +26,7 @@ app.get('/tasks', function (req, res) {
     else {
       // Query was successful
       res.json({
-        tasks: results,
-        envThing: process.env.ENV_THING
+        tasks: results
       });
     }
   });
